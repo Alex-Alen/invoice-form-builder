@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel= "stylesheet" type= "text/css" href="css/bootstrap.min.css"/>
+    <link rel= "stylesheet" type= "text/css" href="css/mostili.css"/>
+</head>
+<meta charset="utf-8" />
+<title>Alex-Alen Pugatsov TA-21V</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css">
+<body>
+    <div class="container-fluid">
+      <div>
+      <h1><strong><center>Форма выставления счета</center></strong></h1>
+      <h1><strong><center>Alex-Alen Pugatsov (TA-21V)</center></strong></h1>
+      </div> 
+
+
+      <div style="position: relative;">
+        <section class="container pt-5">
+          <section class="mb-10">
+            <h5 class="fw-bold text-center mb-5"></h5>
+            <div class="row mb-4">
+              <div class="col-2"> <img src="vscode.PNG" class="img-fluid"></div>
+              <div class="col-10">
+                <p class="mb-2"><strong>Visual Studio Code</strong></p>
+                <p>Visual Studio Code — редактор исходного кода,
+                  разработанный Microsoft для Windows, Linux и macOS.
+                  Позиционируется как «лёгкий» редактор кода для кроссплатформенной разработки веб- и облачных приложений.
+                  Использовался для написания кода.</p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+
+
+
+
+
+
+      <div class="center-fluid col-12 col-md-12 col-lg-12 col-xl-12">
+        <center><h1><strong>Домашнее задание</strong></h1></center>
+        <center><h2>
+
+          <div class="col-10">
+            <p>На базе выполненной в классе работы создать два документа:
+              Форму выставления счета (index.php), в которой должны производиться
+              все проверки заполнения данных, подсчет суммы в каждом ряду и общей суммы, дополнение и удаление рядов.
+              Механизм формирование PDF бланка счета</p>
+          </div>
+
+        </h2></center>
+
+
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+
+        <center><h1><strong>Снимки задания</strong></h1></center>
+
+        <center>
+          <div class="center-fluid col-12 col-md-12 col-lg-12 col-xl-12">
+            <img src="1.PNG" border="2" style="max-width: 90%;"/>
+            <img src="3.PNG" border="2" style="max-width: 90%;"/>
+            <img src="4.PNG" border="2" style="max-width: 90%;"/>
+            <img src="5.PNG" border="2" style="max-width: 90%;"/>
+            <img src="2.PNG" border="2" style="max-width: 90%;"/>
+          </div>
+        </center>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+
+
+      <h1><strong><center>Код программы</center></strong></h1>
+
+
+    <div class="accordion" id="accordionExample" >
+      <div class="accordion-item col-12 col-md-12 col-lg-12 col-xl-12 center-fluid">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Код программы (php)
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+
+<div class="col-10"></div>
+            <pre>
+            <code class="php">
+
+<?php
+date_default_timezone_set('Europe/Helsinki');
+$date = date('d-m-y h:i:s');
+require "TCPDF/tcpdf.php";
+$bill = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$bill->setPrintHeader(false);
+$bill->setPrintFooter(false);
+$bill->SetFont('dejavusans', '', 12);
+$bill->AddPage();
+
+$bill->setXY(8, 60);
+$bill->Cell(0, 0, 'Наименование организации: '.$_POST['userName'], 0, 0, 'L', 0, '', 0);
+
+$bill->setXY(8, 75);
+$bill->Cell(0, 0, 'Электронный адрес: '.$_POST['userEmail'], 0, 0, 'L', 0, '', 0);
+
+$bill->setXY(8, 70);
+$bill->Cell(0, 0, 'Регистрационный номер: '.$_POST['userRegNum'], 0, 0, 'L', 0, '', 0);
+
+$bill->setXY(8, 65);
+$bill->Cell(0, 0, 'Юридический адрес: '.$_POST['userGeo'], 0, 0, 'L', 0, '', 0);
+
+$bill->setXY(85, 81);
+$bill->Cell(0, 0, 'Документ №: '.$_POST['docNR'], 0, 0, 'L', 0, '', 0);
+
+$bill->Image('images/logo.jpg', 8, 8, 50, 50, 'JPG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 1, false, false, false);
+
+$bill->setXY(140, 60);
+// $bill->Cell(0, 0, 'Дата документа: '.$date, 0, 0, 'L', 0, '', 0);
+$bill->Cell(0, 0, 'Дата документа: '.$_POST['docDate'], 0, 0, 'L', 0, '', 0);
+
+$bill->setXY(140, 65);
+$bill->Cell(0, 0, 'Основание: '.$_POST['basedOn'], 0, 0, 'L', 0, '', 0);
+
+
+$bill->Output('example_002.pdf', 'I');
+?>
+
+              </code>
+            </pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <p>&nbsp;</p>
+
+
+
+
+
+
+<div class="accordion" id="accordionExample" >
+  <div class="accordion-item col-12 col-md-12 col-lg-12 col-xl-12 center-fluid">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Код программы (html)
+      </button>
+    </h2>
+    <div id="collapseOne1" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+
+<div class="col-10"></div>
+        <pre>
+        <code class="javascript">
+          <xmp>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style type="text/css">
+NB{color:red; font-weight: 700; font-size: 20px;}
+</style>
+<link href="css/bootstrap.min.css" rel="stylesheet"  />
+<script>
+
+function checkEmail(){
+  emailToVerify = document.getElementById("userEmail").value;
+
+  if (!validateEmail(emailToVerify)) {
+    window.alert("Вы ввели не правельный аддресс электронной почты")
+  }
+}
+
+function myFunc(){
+  checkEmail();
+  var p = document.getElementById("payBefore").value;
+  var d = document.getElementById("docDate").value;
+  if (p < d) {
+    window.alert("Обратите внимане!\nДата для оплаты указана задним числом");
+    return false;
+  }
+}
+
+function validateEmail(mail) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)){
+      return (true)
+  }
+    return (false)
+}
+
+function changeInfo(N) {
+titles=Array();
+info=Array();
+
+titles[1]="Информация о регистрационном номере";
+info[1]="Информацию о регистрационном номере можно найти на сайте <a href=\"https://www.rik.ee/\" target=\"_blank\">rik.ee</a>";
+closebtn[1]="Закрыть";
+
+titles[2]="Информация о юридическом адресе";
+info[2]="Информация о юридическом адресе можно найти на сайте <a href=\"https://www.rik.ee/\" target=\"_blank\">rik.ee</a>.<br /> Почтовый индекс можно узнать на сайте <a href=\"https://postiindeks.ee/et/\">postiindeks.ee</a>";
+closebtn[2]="Закрыть";
+
+titles[3]="Предупреждение";
+info[3]="Вы верены, что хотите удалить?";
+closebtn[3]="Удалить";
+
+  document.getElementById("exampleModalLabel").innerHTML=titles[N];
+  document.getElementById("exampleModalBody").innerHTML=info[N];
+  document.getElementById("closebtn").innerHTML=closebtn[N];
+  document.getElementById("datae").innerHTML=datae[N];
+}
+
+totalnumgers = [];
+function makeSumm(N){
+    //prodPrice1,prodNum1,prodTax1,prodOff1
+    Pr=parseFloat(document.bill["prodPrice"+N].value);
+    Qt=parseFloat(document.bill["prodNum"+N].value);
+    Tx=parseFloat(document.bill["prodTax"+N].value);
+    Of=parseFloat(document.bill["prodOff"+N].value);
+    Sm=Math.floor(Pr*Qt*(1+Tx/100)*(1-Of/100)*100)/100;
+    document.bill["prodSumm"+N].value=Sm;
+    totalnumgers.push(Sm);
+
+    sum = totalnumgers.reduce((partialSum, a) => partialSum + a, 0);
+
+}
+
+function total(){
+  document.getElementById("totalnum").value = sum;
+}
+
+
+function addRow(finDest){
+        // получаем указатель на ряд, в котором кнопка
+        newPlace=finDest.parentElement.parentElement;
+        preRow=newPlace.previousSibling;
+        newNumber=parseInt(preRow.childNodes[0].innerHTML)+1;
+        newRow=document.createElement('tr');
+        newCell=document.createElement('th');
+        newCell.innerHTML=newNumber;
+        newRow.appendChild(newCell);
+        //--------  Добавляем поле названия товара ------------
+        newCell=document.createElement('td');
+        newInput=document.createElement('input');
+        newInput.setAttribute('type','text');
+        newInput.setAttribute('size','70');
+        newInput.setAttribute('required','required');
+        newInput.setAttribute('name','prodName'+newNumber);
+        newCell.appendChild(newInput);
+        newRow.appendChild(newCell);
+        //---------============--------
+      //--------  Добавляем поле цены ------------
+        newCell=document.createElement('td');
+        newInput=document.createElement('input');
+        newInput.setAttribute('type','text');
+        newInput.setAttribute('size','8');
+        newInput.setAttribute('name','prodPrice'+newNumber);
+        newInput.setAttribute('oninput', "this.value=this.value.replace(/[^0-9.]/g,'');")
+        newInput.setAttribute('onChange','makeSumm('+newNumber+'), total()');
+        newInput.setAttribute('value','0');
+        
+        newCell.appendChild(newInput);
+        newRow.appendChild(newCell);
+        //---------============--------
+              //--------  Добавляем поле Количества ------------
+        newCell=document.createElement('td');
+        newInput=document.createElement('input');
+        newInput.setAttribute('type','text');
+        newInput.setAttribute('size','6');
+        newInput.setAttribute('name','prodNum'+newNumber);
+        newInput.setAttribute('oninput', "this.value=this.value.replace(/[^0-9.]/g,'');")
+        newInput.setAttribute('onChange','makeSumm('+newNumber+'), total()');
+        newInput.setAttribute('value','0');
+        newCell.appendChild(newInput);
+        newRow.appendChild(newCell);
+        //---------============--------
+              //--------  Добавляем поле налога ------------
+        newCell=document.createElement('td');
+        newInput=document.createElement('input');
+        newInput.setAttribute('type','text');
+        newInput.setAttribute('size','3');
+        newInput.setAttribute('name','prodTax'+newNumber);
+        newInput.setAttribute('oninput', "this.value=this.value.replace(/[^0-9.]/g,'');")
+        newInput.setAttribute('onChange','makeSumm('+newNumber+'), total()');
+        newInput.setAttribute('value','0');
+        newCell.appendChild(newInput);
+        newRow.appendChild(newCell);
+        //---------============--------
+              //--------  Добавляем поле скидки ------------
+        newCell=document.createElement('td');
+        newInput=document.createElement('input');
+        newInput.setAttribute('type','text');
+        newInput.setAttribute('size','3');
+        newInput.setAttribute('name','prodOff'+newNumber);
+        newInput.setAttribute('oninput', "this.value=this.value.replace(/[^0-9.]/g,'');")
+        newInput.setAttribute('onChange','makeSumm('+newNumber+'), total()');
+newInput.setAttribute('value','0');
+        newCell.appendChild(newInput);
+        newRow.appendChild(newCell);
+        //---------============--------
+              //--------  Добавляем поле суммы ------------
+        newCell=document.createElement('td');
+        newInput=document.createElement('input');
+        newInput.setAttribute('type','text');
+        newInput.setAttribute('size','8');
+        newInput.setAttribute('name','prodSumm'+newNumber);
+        newInput.setAttribute('oninput', "this.value=this.value.replace(/[^0-9.]/g,'');")
+        newInput.setAttribute('value','0');
+        newCell.appendChild(newInput);
+        newInput=document.createElement('input');
+        newInput.setAttribute('type','button');
+        newInput.setAttribute('class','btn btn-danger');
+        newInput.setAttribute('value','X');
+        newInput.setAttribute('data-bs-toggle', 'modal');
+        newInput.setAttribute('data-bs-target', '#exampleModal');
+        newInput.setAttribute('onclick', 'changeInfo(3)')
+        newCell.appendChild(newInput);
+        newRow.appendChild(newCell);
+        //---------============--------
+
+        bigTableBody=newPlace.parentElement;
+        bigTableBody.insertBefore(newRow, newPlace);
+  
+}
+
+</script>
+
+
+</head>
+<body>
+
+<div class="container">
+<h1 class="display-5 text-center">Форма счета</h1>
+<form method="post" action="bill.php" name="bill">
+    <div class="row mb-4">
+        <div class="col-12 col-lg-6 clientsZone">
+            <div class="row">
+                <div class="col-5  text-end">
+                    <label for="userName" class="col-form-label">Наименование организации<NB>*</NB>:</label>
+                </div>		
+                <div class="col-7">
+                    <input type="text" id="userName"  class="form-control" name="userName" required="required" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5  text-end">
+                    <label for="userRegNum" class="col-form-label">Регистрационный номер<NB>*</NB>:</label>
+                </div>
+                <div class="col-7">
+                <div class="input-group">
+                    <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="userRegNum" title="Для уточнения регистрационного номера организации перейдите на сайт ariregister.rik.ee" class="form-control" name="userRegNum" required="required"/>
+                    <button type="button" class="btn btn-warning input-group-text" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="changeInfo(1)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+</svg></button>										
+                </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-5  text-end">
+                    <label for="userGeo" class="col-form-label">Юридический адрес<NB>*</NB>:</label>
+                </div>
+                <div class="col-7">
+                <div class="input-group">
+                    <input type="text" id="userGeo"  class="form-control" name="userGeo" required="required"/>
+                    <button type="button" class="btn btn-warning input-group-text" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="changeInfo(2)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+</svg></button>	
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5  text-end">
+                    <label for="userEmail" class="col-form-label">Электронный адрес:<NB>*</NB></label>
+                </div>
+                <div class="col-7">
+                    <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="user@firma.com" required="required"/>
+                </div>
+            </div>
+        </div> <!--// -- clientsZone -- //-->
+        <div class="col-12 col-lg-6 actZone">
+            <div class="row">
+                <div class="col-5  text-end">
+                    <label for="basedOn" class="col-form-label">Основание:<NB>*</NB></label>
+                </div>
+                <div class="col-7">
+                    <input type="text" id="basedOn"  class="form-control" name="basedOn" required="required"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5  text-end">
+                    <label for="docNR" class="col-form-label">Документ №:<NB>*</NB></label>
+                </div>
+                <div class="col-7">
+                    <input type="text" id="docNR"  class="form-control" name="docNR" required="required"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5   text-end">
+                    <label for="docDate" class="col-form-label">Дата документа:<NB>*</NB></label>
+                </div>
+                <div class="col-7">
+                    <input type="date" id="docDate"  class="form-control" name="docDate" required="required"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5  text-end">
+                    <label for="payBefore" class="col-form-label">Оплатить до:<NB>*</NB></label>
+                </div>
+                <div class="col-7">
+                    <input type="date" id="payBefore"  class="form-control" name="payBefore" required="required"/>
+                </div>
+            </div>
+        </div> <!--// -- actZone -- //-->
+    </div>  <!--// -- row -- //-->
+    <div class="row  mt-5">		
+        <div class="col">
+            <table class="table table-striped">
+                <thead><tr>
+                    <th scope="col">№</th>								
+                    <th scope="col">Наименование</th>								
+                    <th scope="col">Цена(€)</th>								
+                    <th scope="col">Кол-во (шт.)</th>								
+                    <th scope="col">Налог (%)</th>								
+                    <th scope="col">Скидка (%)</th>								
+                    <th scope="col">Сумма (€)</th>								
+                </tr></thead>
+                <tbody>	<tr><th scope="row">1</th>
+                    <td><input type="text" size="70" name="prodName1" required="required" /></td>
+                    <td><input type="text" size="8" name="prodPrice1" oninput="this.value=this.value.replace(/[^0-9.]/g,'');" id ="prodprice" value="0" onchange="makeSumm(1)" /></td>
+                    <td><input type="text" size="6" name="prodNum1" oninput="this.value=this.value.replace(/[^0-9.]/g,'');" id ="prodnum" value="0" onchange="makeSumm(1), total()" /></td>
+                    <td><input type="text" size="3" name="prodTax1" oninput="this.value=this.value.replace(/[^0-9.]/g,'');" id ="prodtax" value="0" onchange="makeSumm(1), total()" /></td>
+                    <td><input type="text" size="3" name="prodOff1" oninput="this.value=this.value.replace(/[^0-9.]/g,'');" id ="prodOff" value="0" onchange="makeSumm(1), total()" /></td>
+                    <td><input type="text" size="8" name="prodSumm1" oninput="this.value=this.value.replace(/[^0-9.]/g,'');" id ="prodSumm" value="0" onchange="total()" /><input type="button" class="btn btn-danger" value="X" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="changeInfo(3)"/></td>
+                </tr><tr>
+                    <td><input type="button" value="+" onclick="addRow(this)" /></td>
+                    <td></td>								
+                    <td></td>								
+                    <td></td>								
+                    <td></td>								
+                    <th>ИТОГО:</th>								
+                    <td><input type="text" size="8" name="TOTAL" value="0" id="totalnum"/></td>								
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 text-end">
+          <button type="submit" class="btn btn-success" onclick="myFunc(); ">Отправить</button>
+        
+        </div>
+    </div> <!--// -- row -- //-->
+</form>
+</div> <!--// -- container -- //-->
+
+
+
+
+<!-- Модальное окно -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Предупреждение</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body" id="exampleModalBody">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closebtn"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.bundle.min.js" ></script>
+</body>
+</html>
+
+            </xmp>
+            </pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>&nbsp;</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script language = "javascript" src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
